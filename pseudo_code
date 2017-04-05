@@ -1,0 +1,53 @@
+Main:
+
+open dataTraining file the parse records line by line
+    dataTraining = [[]]
+
+attributes = dataTraining[0] //first record
+
+remove attributes from dataTraining //remove the first record
+
+choose target = ?    //attributes[?]
+
+tree = ID3.makeTree(dataTraining, attributes, target , 0 )
+
+------------------------------------------------------------
+ID3:
+
+makeTree(dataTraining, attributes, target , recursion ){
+    recursion++;
+
+    If(dataset is empty OR attributes list is empty) Then return default value
+    Elseif (all the records have the same clssification) Then return that classification
+    Else:
+
+        best = chooseAttribute_has_HighestIG();
+
+        tree = {best:{}}
+
+        foreach (val in getValues(dataTraining, attributes, best):
+
+              newDataTraining = createReduceTabble(); //remove column 'best', remove record doesn't have val
+
+              newAttributes = attributes removes best
+
+              subtree = makeTree(newDataTraining, newAttributes, target , recursion )
+
+              tree[best][val] = subtreel
+
+    Endif
+
+    return tree;
+
+
+
+
+
+
+
+
+
+}
+
+
+
